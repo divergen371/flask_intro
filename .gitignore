@@ -261,5 +261,6 @@ pyrightconfig.json
 
 #VSCode
 .vscode/
+poetry.lock
 
 # End of https://www.toptal.com/developers/gitignore/api/flask,python
