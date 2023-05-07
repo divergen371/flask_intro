@@ -1,16 +1,12 @@
-from flask import (
-    Flask,
-    Response,
-    render_template,
-    session,
-    request,
-    redirect,
-    url_for,
-)
+# Standard Library
 import os
 
+# Third Party Library
 import werkzeug
+from flask import Flask, redirect, render_template, request, session, url_for
 
+# First Party Library
+from pref_question import pref_location
 
 # インスタンスの作成
 app = Flask(__name__)
@@ -53,3 +49,15 @@ def logincheck() -> werkzeug.Response:
 def logout() -> werkzeug.Response:
     session.pop("login", None)
     return redirect(url_for("index"))
+
+
+@app.route("/pref_quiz", methods=["POST"])
+def pref_quiz() -> str:
+    random_perf: str
+    city_name: str
+    perf_url: str
+    random_perf, city_name, perf_url = pref_location()
+    session["prefecture"] = random_perf
+    session["city"] = city_name
+    session["url"] = perf_url
+    return render_template("quiz.html", prefecture=random_perf)
