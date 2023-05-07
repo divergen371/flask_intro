@@ -1,9 +1,0 @@
-{
-    "python.linting.banditEnabled": false,
-    "python.linting.flake8Enabled": true,
-    "python.linting.mypyEnabled": true,
-    "python.linting.enabled": true,
-    "cSpell.words": [
-        "logincheck"
-    ]
-}
