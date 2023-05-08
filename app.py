@@ -1,5 +1,6 @@
 # Standard Library
 import os
+from typing import Any
 
 # Third Party Library
 import werkzeug
@@ -61,3 +62,20 @@ def pref_quiz() -> str:
     session["city"] = city_name
     session["url"] = perf_url
     return render_template("quiz.html", prefecture=random_perf)
+
+
+@app.route("/answercheck", methods=["POST"])
+def answercheck() -> str:
+    user_answer: str = request.form["city"]
+    prefecture: Any = session.get("prefecture")
+    city: Any = session.get("city")
+    url: Any = session.get("url")
+
+    if user_answer == city:
+        result = "正解!!"
+    else:
+        result = "残念‼"
+
+    return render_template(
+        "result.html", result=result, prefecture=prefecture, city=city, url=url
+    )
